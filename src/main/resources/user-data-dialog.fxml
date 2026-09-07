@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<DialogPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.dailymeal.PresentationLayer.UserDataController"
+            prefWidth="450" prefHeight="400">
+
+    <headerText>Введите ваши данные для расчета дневной нормы калорий</headerText>
+
+    <content>
+        <GridPane hgap="10" vgap="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <Label text="Вес (кг):" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="weightField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+            <Label text="Рост (см):" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="heightField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text="Возраст:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="ageField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <Label text="Активность:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <ComboBox fx:id="activityComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="250" style="-fx-font-size: 14px;">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Низкая (1.2)"/>
+                        <String fx:value="Нормальная (1.375)"/>
+                        <String fx:value="Средняя (1.55)"/>
+                        <String fx:value="Высокая (1.725)"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <Label fx:id="resultLabel" text="Дневная норма: -- ккал"
+                   GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"
+                   style="-fx-font-weight: bold; -fx-text-fill: blue;"/>
+        </GridPane>
+    </content>
+
+    <buttonTypes>
+        <ButtonType fx:constant="OK"/>
+        <ButtonType fx:constant="CANCEL"/>
+    </buttonTypes>
+</DialogPane>

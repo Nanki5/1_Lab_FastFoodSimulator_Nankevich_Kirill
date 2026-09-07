@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextInputDialog?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.dailymeal.PresentationLayer.MainController"
+      spacing="10" prefWidth="1200" prefHeight="700">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <!-- Верхняя панель с кнопками -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text="Загрузить данные пользователя" onAction="#handleLoadUserData"/>
+        <Button text="Экспорт плана" onAction="#handleExport"/>
+        <Label text="Дневная норма:"/>
+        <Label fx:id="dailyNormLabel" text="0 ккал" style="-fx-font-weight: bold; -fx-text-fill: green;"/>
+        <Label text="Осталось:"/>
+        <Label fx:id="remainingCaloriesLabel" text="0 ккал" style="-fx-font-weight: bold;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="Поиск продуктов..." prefWidth="200"/>
+        <Button text="Найти" onAction="#handleSearch"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Основная область: 2 колонки -->
+    <SplitPane dividerPositions="0.4" VBox.vgrow="ALWAYS">
+        <!-- Левая панель: Каталог продуктов -->
+        <VBox spacing="5">
+            <Label text="Каталог продуктов" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+            <TreeView fx:id="catalogTreeView" VBox.vgrow="ALWAYS"/>
+
+            <HBox spacing="5">
+                <Button text="Добавить категорию" onAction="#handleAddCategory"/>
+                <Button text="Добавить продукт" onAction="#handleAddProduct"/>
+                <Button text="Удалить" onAction="#handleDelete"/>
+            </HBox>
+        </VBox>
+
+        <!-- Правая панель: План питания -->
+        <VBox spacing="5">
+            <Label text="План питания на день" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+            <!-- TabPane для приемов пищи -->
+            <TabPane fx:id="mealPlanTabPane" VBox.vgrow="ALWAYS">
+                <Tab text="Завтрак" closable="false">
+                    <VBox spacing="5">
+                        <padding><Insets top="5" right="5" bottom="5" left="5"/></padding>
+                        <TableView fx:id="breakfastTableView" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn text="Продукт" prefWidth="150"/>
+                                <TableColumn text="Вес (г)" prefWidth="80"/>
+                                <TableColumn text="Калории" prefWidth="80"/>
+                                <TableColumn text="Белки" prefWidth="80"/>
+                                <TableColumn text="Жиры" prefWidth="80"/>
+                                <TableColumn text="Углеводы" prefWidth="80"/>
+                            </columns>
+                        </TableView>
+                        <Label text="Итого за завтрак:"/>
+                        <Label fx:id="breakfastTotalLabel" text="0 ккал" style="-fx-font-weight: bold;"/>
+                    </VBox>
+                </Tab>
+                <Tab text="Обед" closable="false">
+                    <VBox spacing="5">
+                        <padding><Insets top="5" right="5" bottom="5" left="5"/></padding>
+                        <TableView fx:id="lunchTableView" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn text="Продукт" prefWidth="150"/>
+                                <TableColumn text="Вес (г)" prefWidth="80"/>
+                                <TableColumn text="Калории" prefWidth="80"/>
+                                <TableColumn text="Белки" prefWidth="80"/>
+                                <TableColumn text="Жиры" prefWidth="80"/>
+                                <TableColumn text="Углеводы" prefWidth="80"/>
+                            </columns>
+                        </TableView>
+                        <Label text="Итого за обед:"/>
+                        <Label fx:id="lunchTotalLabel" text="0 ккал" style="-fx-font-weight: bold;"/>
+                    </VBox>
+                </Tab>
+                <Tab text="Ужин" closable="false">
+                    <VBox spacing="5">
+                        <padding><Insets top="5" right="5" bottom="5" left="5"/></padding>
+                        <TableView fx:id="dinnerTableView" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn text="Продукт" prefWidth="150"/>
+                                <TableColumn text="Вес (г)" prefWidth="80"/>
+                                <TableColumn text="Калории" prefWidth="80"/>
+                                <TableColumn text="Белки" prefWidth="80"/>
+                                <TableColumn text="Жиры" prefWidth="80"/>
+                                <TableColumn text="Углеводы" prefWidth="80"/>
+                            </columns>
+                        </TableView>
+                        <Label text="Итого за ужин:"/>
+                        <Label fx:id="dinnerTotalLabel" text="0 ккал" style="-fx-font-weight: bold;"/>
+                    </VBox>
+                </Tab>
+            </TabPane>
+
+            <!-- ДОБАВЛЕНО: Общая статистика по КБЖУ -->
+            <VBox spacing="5" style="-fx-border-color: lightgray; -fx-border-radius: 5; -fx-padding: 10;">
+                <Label text="ИТОГО ЗА ДЕНЬ:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                <GridPane hgap="20" vgap="5">
+                    <Label text="🔥 Калории:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="totalCaloriesLabel" text="0 ккал" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-text-fill: #d32f2f; -fx-font-weight: bold;"/>
+
+                    <Label text="🍗 Белки:" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="totalProteinsLabel" text="0 г" GridPane.columnIndex="3" GridPane.rowIndex="0" style="-fx-text-fill: #388e3c; -fx-font-weight: bold;"/>
+
+                    <Label text="🌻 Жиры:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="totalFatsLabel" text="0 г" GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-text-fill: #f57c00; -fx-font-weight: bold;"/>
+
+                    <Label text="🍚 Углеводы:" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="totalCarbsLabel" text="0 г" GridPane.columnIndex="3" GridPane.rowIndex="1" style="-fx-text-fill: #1976d2; -fx-font-weight: bold;"/>
+                </GridPane>
+            </VBox>
+        </VBox>
+    </SplitPane>
+</VBox>
