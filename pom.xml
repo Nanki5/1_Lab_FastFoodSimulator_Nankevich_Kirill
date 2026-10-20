@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>DailyMeal</artifactId>
+    <artifactId>FastFoodSimulator</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>DailyMeal</name>
 
@@ -78,7 +78,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.example.dailymeal/org.example.dailymeal.HelloApplication</mainClass>
+                            <mainClass>org.example.dailymeal/org.example.dailymeal.Application</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
