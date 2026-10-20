@@ -1,7 +1,6 @@
 package org.example.dailymeal.simulation;
 
 import org.example.dailymeal.model.Customer;
-import org.example.dailymeal.model.Order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,4 @@ public class CustomerQueue {
         return queue.size();
     }
 
-    public List<Customer> peekAll() {
-        return new ArrayList<>(queue);
-    }
 }

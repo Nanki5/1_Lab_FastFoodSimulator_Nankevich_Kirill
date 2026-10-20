@@ -40,7 +40,6 @@ public class OrderTaker implements Runnable {
                 customer.setCurrentOrder(order);
                 customer.setState(Customer.CustomerState.PLACING_ORDER);
 
-                // Ждем столько, сколько указано в настройках
                 Thread.sleep(orderTakingTimeMs);
 
                 customer.setState(Customer.CustomerState.WAITING_IN_SERVING_LINE);

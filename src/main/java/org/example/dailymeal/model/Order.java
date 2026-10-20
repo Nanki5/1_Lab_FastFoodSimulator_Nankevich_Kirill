@@ -4,8 +4,8 @@ import java.util.concurrent.CompletableFuture;
 
 public class Order {
     private final int orderNumber;
-    private CompletableFuture<Order> readyForServer;
-    private CompletableFuture<Order> readyForPickUp;
+    private final CompletableFuture<Order> readyForServer;
+    private final CompletableFuture<Order> readyForPickUp;
 
     public Order(int orderNumber){
         this.orderNumber = orderNumber;
